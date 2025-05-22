@@ -8,7 +8,6 @@ import {
   SiSpringboot, SiReact, SiNodedotjs, SiJavascript, SiHtml5, SiCss3, SiGraphql, SiGit, SiGithub, SiGitlab, SiJenkins,
   SiSupabase, SiHasura, SiPostman, SiJirasoftware, SiSonarqube, SiDevexpress,
 } from "react-icons/si";
-
 import { FaJava } from "react-icons/fa";
 import { HiOutlineSwitchHorizontal } from "react-icons/hi";
 
@@ -56,16 +55,22 @@ const Skills = () => {
   const { ref, inView } = useInView();
 
   return (
-    <section id="skills" className="py-20" style={{
-      background: "linear-gradient(to bottom, #f3e8ff, #ffffff)"
-    }}>
+    <section
+      id="skills"
+      className="py-16 sm:py-20 md:py-24"
+      style={{
+        background: "linear-gradient(to bottom, #f3e8ff, #ffffff)"
+      }}
+    >
       <div
         ref={ref}
-        className={`container max-w-4xl section-container ${inView ? 'animate' : ''}`}
+        className="container max-w-5xl mx-auto px-4 sm:px-6 md:px-8"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-center mb-10 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 text-transparent bg-clip-text">Skills</h2>
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-10 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 text-transparent bg-clip-text">
+          Skills
+        </h2>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
           {skillCategories.map((category, i) => (
             <motion.div
               key={i}
@@ -73,20 +78,21 @@ const Skills = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.2 }}
             >
-              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <CardContent className="p-6">
+              <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+                <CardContent className="p-5 sm:p-6">
                   <div className="flex items-center gap-2 mb-4">
                     {category.icon}
-                    <h3 className="text-xl font-semibold">{category.title}</h3>
+                    <h3 className="text-lg sm:text-xl font-semibold">{category.title}</h3>
                   </div>
-                  <div className="flex flex-wrap gap-4">
+
+                  <div className="flex flex-wrap justify-start gap-4">
                     {category.skills.map((skill, j) => (
                       <div
                         key={j}
                         className="flex flex-col items-center gap-1 w-16 text-center text-xs text-muted-foreground"
                       >
-                        <div className="text-2xl">{skill.icon}</div>
-                        <span>{skill.label}</span>
+                        <div className="text-xl sm:text-2xl">{skill.icon}</div>
+                        <span className="text-[11px] sm:text-xs">{skill.label}</span>
                       </div>
                     ))}
                   </div>

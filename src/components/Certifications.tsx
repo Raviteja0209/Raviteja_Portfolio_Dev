@@ -4,8 +4,7 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { useInView } from "@/hooks/useInView";
 import { motion } from "framer-motion";
-import { Eye } from "lucide-react";
-import { Award as AwardIcon } from "lucide-react";
+import { Eye, Award as AwardIcon } from "lucide-react";
 import metaIcon from "@/components/assets/meta.png";
 import metaCertificate from "@/components/assets/MetaFrontEndDevelopmentCertificate.jpg";
 import reactCertificate from "@/components/assets/ReactCertificate.jpg";
@@ -27,27 +26,27 @@ const CertificationCard = ({
     transition={{ duration: 0.5, delay: index * 0.2 }}
   >
     <Card className="hover:shadow-lg transition-transform transform hover:scale-[1.02]">
-      <CardContent className="p-4 md:p-6 flex items-center justify-between">
-        <div>
+      <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3">
           <img
             src={metaIcon}
             alt="Meta Logo"
             width={32}
             height={32}
-            className="rounded"
+            className="rounded shrink-0"
           />
-          <h4 className="font-medium text-lg">{cert.title}</h4>
-          <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+          <div>
+            <h4 className="font-medium text-base sm:text-lg">{cert.title}</h4>
+            <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+          </div>
         </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => onPreview(cert.link)}
-            className="text-red-500 hover:text-red-500/80"
-            title="View Certificate"
-          >
-            <Eye className="w-5 h-5" />
-          </button>
-        </div>
+        <button
+          onClick={() => onPreview(cert.link)}
+          className="text-red-500 hover:text-red-500/80"
+          title="View Certificate"
+        >
+          <Eye className="w-5 h-5" />
+        </button>
       </CardContent>
     </Card>
   </motion.div>
@@ -68,11 +67,11 @@ const AwardCard = ({
     transition={{ duration: 0.5, delay: index * 0.2 }}
   >
     <Card className="hover:shadow-lg transition-transform transform hover:scale-[1.02]">
-      <CardContent className="p-4 md:p-6 flex items-center justify-between">
+      <CardContent className="p-4 sm:p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <AwardIcon className="w-7 h-7 text-red-500" />
-            <h4 className="font-medium text-lg">{award.title}</h4>
+            <AwardIcon className="w-6 h-6 sm:w-7 sm:h-7 text-red-500" />
+            <h4 className="font-medium text-base sm:text-lg">{award.title}</h4>
           </div>
           <p className="text-sm text-muted-foreground">{award.description}</p>
         </div>
@@ -89,7 +88,6 @@ const AwardCard = ({
     </Card>
   </motion.div>
 );
-
 
 const Certifications = () => {
   const { ref, inView } = useInView();
@@ -113,37 +111,33 @@ const Certifications = () => {
       title: "Q2 2023 Dynamo Award Winner @ Donyati",
       description:
         "Technological advancement within our organization for Technology Service",
-      link: quarteraward1
+      link: quarteraward1,
     },
     {
       title: "Q3 2023 Dynamo Award Winner @ Donyati",
       description:
         "Technological advancement within our organization for Technology Service",
-      link: quarteraward2
-    }
+      link: quarteraward2,
+    },
   ];
 
   return (
     <section
       id="certifications"
-      className="py-20"
+      className="py-16 sm:py-20 px-4 sm:px-6 md:px-8"
       style={{
-        background: "linear-gradient(to bottom, #fff5f5, #ffffff)"
+        background: "linear-gradient(to bottom, #fff5f5, #ffffff)",
       }}
-
     >
       <div
         ref={ref}
-        className={`container max-w-4xl section-container ${inView ? "animate" : ""}`}
+        className={`max-w-5xl mx-auto section-container ${inView ? "animate" : ""}`}
       >
-        <h2
-          id="certifications-title"
-          className="text-3xl md:text-4xl font-bold text-center mb-10 bg-red-500 text-transparent bg-clip-text"
-        >
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 bg-red-500 text-transparent bg-clip-text">
           Certifications & Awards
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <h3 className="text-xl font-semibold mb-4">Certifications</h3>
             <div className="space-y-4">
@@ -175,20 +169,18 @@ const Certifications = () => {
 
         {/* Image Preview Modal */}
         {previewImage && (
-          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
-            <div className="relative max-w-xl w-full bg-white rounded-lg shadow-lg p-4">
+          <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4">
+            <div className="relative w-full max-w-2xl bg-white rounded-lg shadow-lg p-4">
               <button
                 onClick={() => setPreviewImage(null)}
-                className="absolute top-2 right-2 text-black hover:text-gray-600"
+                className="absolute top-2 right-2 text-black hover:text-gray-600 text-xl"
               >
                 ✕
               </button>
               <img
                 src={previewImage}
                 alt="Certificate Preview"
-                className="w-full h-auto rounded"
-                layout="responsive"
-                objectFit="contain"
+                className="w-full h-auto rounded object-contain"
               />
             </div>
           </div>
