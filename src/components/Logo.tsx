@@ -53,12 +53,12 @@ const DevCodeLogo: React.FC<DevCodeLogoProps> = ({
           letterSpacing="0"
         >
           <text x="20" y="45">{'<'}</text>
-          <text x="80" y="45" letterSpacing="1">RT</text>
+          <text x="75" y="45" letterSpacing="1">RT</text>
           <text x="145" y="45">{'/>'}</text>
         </g>
 
         <text
-          x="110"
+          x="115"
           y="85"
           className="subtitle"
           textAnchor="middle"

@@ -8,7 +8,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center pt-12 md:pt-16 pb-16 md:pb-20"
+      className="scroll-mt-32 min-h-screen flex items-center pt-32 pb-16 md:pb-20"
       style={{
         background: "linear-gradient(to bottom, #fdfaf6, #ffffff)",
       }}
