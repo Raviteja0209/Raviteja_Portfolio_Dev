@@ -93,11 +93,15 @@ const Navbar = () => {
       </nav>
 
       {/* Mobile Top Navbar */}
+      {/* Mobile Top Navbar */}
       <div className="fixed top-0 left-0 w-full bg-gray-800 shadow-md z-50 md:hidden">
         <div className="flex items-center justify-between px-4 py-3">
-          <div className="text-lg font-semibold text-teal-600">
-            Ravi Teja Adari
+          {/* Logo for mobile */}
+          <div className="flex items-center gap-2">
+            <RTLogo />
           </div>
+
+          {/* Toggle Menu Button */}
           <button
             className="px-3 py-1 text-sm border rounded-md border-teal-600 text-teal-600"
             onClick={() => {
@@ -109,6 +113,7 @@ const Navbar = () => {
           </button>
         </div>
 
+        {/* Mobile menu links */}
         <div id="mobile-menu" className="hidden w-full bg-gray-800 border-t overflow-y-auto max-h-[60vh]">
           {navItems.map(({ id, label }) => (
             <button
@@ -121,6 +126,7 @@ const Navbar = () => {
           ))}
         </div>
       </div>
+
     </>
   );
 };
