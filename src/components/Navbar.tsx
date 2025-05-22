@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import RTLogo from './Logo';
 import {
-  User, LineChart, Briefcase, BarChart2, Award, GraduationCap, Mail, FileText
+  User, LineChart, Briefcase, BarChart2, Award,
+  GraduationCap, Mail, FileText
 } from "lucide-react";
 
 const Navbar = () => {
@@ -9,9 +10,11 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['about', 'experience', 'projects', 'skills', 'certifications', 'education', 'resume', 'contact'];
+      const sections = [
+        'about', 'experience', 'projects', 'skills',
+        'certifications', 'education', 'resume', 'contact'
+      ];
 
-      // Find active section
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
         if (!element) return false;
@@ -36,108 +39,60 @@ const Navbar = () => {
         top: element.offsetTop - 80,
         behavior: 'smooth'
       });
+
+      // Close mobile menu if open
+      const menu = document.getElementById('mobile-menu');
+      if (menu) menu.classList.add('hidden');
     }
   };
 
+  const navItems = [
+    { id: 'about', label: 'About', icon: User, color: 'bg-teal-600' },
+    { id: 'experience', label: 'Experience', icon: LineChart, color: 'bg-blue-500' },
+    { id: 'projects', label: 'Projects', icon: Briefcase, color: 'bg-blue-700' },
+    { id: 'skills', label: 'Skills', icon: BarChart2, color: 'bg-purple-600' },
+    { id: 'certifications', label: 'Awards', icon: Award, color: 'bg-red-500' },
+    { id: 'education', label: 'Education', icon: GraduationCap, color: 'bg-amber-500' },
+    { id: 'resume', label: 'Resume', icon: FileText, color: 'bg-gray-700' },
+    { id: 'contact', label: 'Contact', icon: Mail, color: 'bg-amber-800' },
+  ];
+
   return (
-    <nav
-      className="
-        fixed top-0 left-0 w-64
-        bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900
-        py-6 px-4 shadow-lg z-50 h-full
-        overflow-y-auto
-        scrollbar-hide
-        hover:overflow-y-auto
-      "
-    >
-      <div className="flex flex-col h-full">
-        <div className="mb-12">
-          <RTLogo />
+    <>
+      {/* Desktop Sidebar */}
+      <nav
+        className="
+          hidden md:block
+          fixed top-0 left-0 w-64
+          bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900
+          py-6 px-4 shadow-lg z-50 h-full
+          overflow-y-auto
+          scrollbar-hide
+          hover:overflow-y-auto
+        "
+      >
+        <div className="flex flex-col h-full">
+          <div className="mb-12">
+            <RTLogo />
+          </div>
+          <div className="flex-1 flex flex-col space-y-4">
+            {navItems.map(({ id, label, icon: Icon, color }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="flex items-center text-gray-300 hover:text-teal-600 py-2"
+              >
+                <div className={`w-6 h-6 rounded-full ${color} flex items-center justify-center mr-3`}>
+                  <Icon className="w-4 h-4 text-white" />
+                </div>
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
         </div>
-        <div className="flex-1 flex flex-col space-y-4">
-          <button
-            onClick={() => scrollToSection('about')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'about' ? 'bg-teal-600' : 'bg-teal-600'} flex items-center justify-center mr-3`}>
-              <User className="w-4 h-4 text-white" />
-            </div>
-            <span>About</span>
-          </button>
+      </nav>
 
-          <button
-            onClick={() => scrollToSection('experience')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'experience' ? 'bg-blue-500' : 'bg-blue-500'} flex items-center justify-center mr-3`}>
-              <LineChart className="w-4 h-4 text-white" />
-            </div>
-            <span>Experience</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('projects')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'projects' ? 'bg-blue-700' : 'bg-blue-700'} flex items-center justify-center mr-3`}>
-              <Briefcase className="w-4 h-4 text-white" />
-            </div>
-            <span>Projects</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('skills')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'skills' ? 'bg-purple-600' : 'bg-purple-600'} flex items-center justify-center mr-3`}>
-              <BarChart2 className="w-4 h-4 text-white" />
-            </div>
-            <span>Skills</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('certifications')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'certifications' ? 'bg-red-500' : 'bg-red-500'} flex items-center justify-center mr-3`}>
-              <Award className="w-4 h-4 text-white" />
-            </div>
-            <span>Awards</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('education')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'education' ? 'bg-amber-500' : 'bg-amber-500'} flex items-center justify-center mr-3`}>
-              <GraduationCap className="w-4 h-4 text-white" />
-            </div>
-            <span>Education</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('resume')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'resume' ? 'bg-gray-700' : 'bg-gray-700'} flex items-center justify-center mr-3`}>
-              <FileText className="w-4 h-4 text-white" />
-            </div>
-            <span>Resume</span>
-          </button>
-
-          <button
-            onClick={() => scrollToSection('contact')}
-            className="flex items-center text-gray-300 hover:text-teal-600 py-2"
-          >
-            <div className={`w-6 h-6 rounded-full ${activeSection === 'contact' ? 'bg-amber-800' : 'bg-amber-800'} flex items-center justify-center mr-3`}>
-              <Mail className="w-4 h-4 text-white" />
-            </div>
-            <span>Contact</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Navigation */}
+      {/* Mobile Top Navbar */}
       <div className="fixed top-0 left-0 w-full bg-gray-800 shadow-md z-50 md:hidden">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="text-lg font-semibold text-teal-600">
@@ -147,9 +102,7 @@ const Navbar = () => {
             className="px-3 py-1 text-sm border rounded-md border-teal-600 text-teal-600"
             onClick={() => {
               const menu = document.getElementById('mobile-menu');
-              if (menu) {
-                menu.classList.toggle('hidden');
-              }
+              if (menu) menu.classList.toggle('hidden');
             }}
           >
             Menu
@@ -157,19 +110,10 @@ const Navbar = () => {
         </div>
 
         <div id="mobile-menu" className="hidden w-full bg-gray-800 border-t overflow-y-auto max-h-[60vh]">
-          {[
-            { section: 'about', label: 'About' },
-            { section: 'experience', label: 'Experience' },
-            { section: 'projects', label: 'Projects' },
-            { section: 'skills', label: 'Skills' },
-            { section: 'certifications', label: 'Awards' },
-            { section: 'education', label: 'Education' },
-            { section: 'contact', label: 'Contact' },
-            { section: 'resume', label: 'Resume' },
-          ].map(({ section, label }) => (
+          {navItems.map(({ id, label }) => (
             <button
-              key={section}
-              onClick={() => scrollToSection(section)}
+              key={id}
+              onClick={() => scrollToSection(id)}
               className="block w-full text-left px-4 py-3 hover:bg-gray-700 text-gray-300 transition-all"
             >
               {label}
@@ -177,7 +121,7 @@ const Navbar = () => {
           ))}
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
